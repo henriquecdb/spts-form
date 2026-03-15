@@ -1,0 +1,165 @@
+.page {
+  display: flex;
+  width: 100%;
+  min-height: 100dvh;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.form-shell {
+  width: min(680px, 100%);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0 20px 45px rgba(26, 44, 76, 0.12);
+}
+
+.form-shell.done {
+  align-items: flex-start;
+}
+
+.step-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--brand);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0;
+}
+
+.description {
+  margin: 0;
+  color: var(--muted);
+}
+
+.form-error {
+  margin: 0;
+  color: #b42318;
+  font-weight: 600;
+}
+
+.fields-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+.choice-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.choice-card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #ffffff;
+  padding: 16px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.choice-card:hover {
+  border-color: #96b8f2;
+}
+
+.choice-card-selected {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 2px rgba(25, 102, 255, 0.12);
+}
+
+.choice-title {
+  font-weight: 700;
+  color: var(--heading);
+}
+
+.choice-description {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.field-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px;
+}
+
+.field-card span {
+  font-weight: 600;
+  color: var(--heading);
+}
+
+.field-card input {
+  width: 100%;
+  border: 1px solid #bac8de;
+  border-radius: 10px;
+  padding: 11px 12px;
+  font: inherit;
+  color: #1f2f4a;
+  box-sizing: border-box;
+}
+
+.field-card input:focus {
+  outline: 2px solid rgba(25, 102, 255, 0.24);
+  border-color: var(--brand);
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.button {
+  border: 0;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.button-primary {
+  background: var(--brand);
+  color: #ffffff;
+}
+
+.button-secondary {
+  background: #e5ecf8;
+  color: #375688;
+}
+
+@media (max-width: 600px) {
+  .form-shell {
+    padding: 20px;
+  }
+
+  .choice-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .actions {
+    flex-direction: column-reverse;
+  }
+}
