@@ -1,23 +1,15 @@
-import express from "express";
-import dotenv from "dotenv";
 import {
   buildDiscordEmbed,
   resolveWebhookUrl,
   sendDiscordEmbed,
-} from "./lib/submitWebhook.js";
+} from "../lib/submitWebhook.js";
 
-dotenv.config();
+export default async function handler(request, response) {
+  if (request.method !== "POST") {
+    response.status(405).json({ error: "Método não permitido." });
+    return;
+  }
 
-const app = express();
-const port = Number(process.env.PORT || 3001);
-
-app.use(express.json());
-
-app.get("/api/health", (_, response) => {
-  response.json({ ok: true });
-});
-
-app.post("/api/submit", async (request, response) => {
   const { trackId, trackLabel, answers } = request.body ?? {};
 
   if (!trackLabel || !Array.isArray(answers) || answers.length === 0) {
@@ -41,15 +33,11 @@ app.post("/api/submit", async (request, response) => {
 
   try {
     await sendDiscordEmbed(webhookUrl, embed);
-    response.json({ ok: true });
+    response.status(200).json({ ok: true });
   } catch (error) {
     response.status(502).json({
       error: "Webhook do Discord retornou erro.",
       details: String(error?.details ?? error),
     });
   }
-});
-
-app.listen(port, () => {
-  console.log(`Servidor webhook ativo.`);
-});
+}
