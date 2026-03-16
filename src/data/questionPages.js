@@ -1,5 +1,7 @@
+import { TRACK_IDS } from "../../lib/trackIds.js";
+
 export const questionPagesByTrack = {
-  squad: [
+  [TRACK_IDS.SQUAD]: [
     {
       id: "discordNick",
       label: "Qual é o seu usuário no Discord?",
@@ -111,7 +113,7 @@ export const questionPagesByTrack = {
       boolean: true,
     },
   ],
-  projectReality: [
+  [TRACK_IDS.PROJECT_REALITY]: [
     {
       id: "discordNick",
       label: "Qual é o seu usuário no Discord?",
