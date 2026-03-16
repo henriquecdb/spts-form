@@ -2,14 +2,22 @@
   display: flex;
   width: 100%;
   min-height: 100dvh;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
   padding: 24px;
   box-sizing: border-box;
 }
 
-.form-shell {
+.page-content {
   width: min(680px, 100%);
+  min-height: calc(100dvh - 48px);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.form-shell {
+  width: 100%;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 16px;
@@ -106,9 +114,40 @@
   color: var(--heading);
 }
 
+.choice-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.choice-game-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
 .choice-description {
   color: var(--muted);
   font-size: 14px;
+}
+
+.discord-link-note {
+  margin: -8px 0 2px;
+  color: #5a3232;
+  font-size: 14px;
+}
+
+.discord-link-note a {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: var(--brand);
+  font-weight: 700;
+}
+
+.discord-link-note a:hover {
+  text-decoration-thickness: 2px;
 }
 
 .field-card {
@@ -252,6 +291,43 @@
   color: #660100;
 }
 
+.app-footer {
+  width: 100%;
+  margin-top: auto;
+  border-top: 1px solid var(--border);
+  padding: 10px 2px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+}
+
+.footer-logo {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.footer-credit {
+  margin: 0;
+  color: #6b7a90;
+  font-size: 14px;
+}
+
+.footer-credit a {
+  color: #587092;
+  text-decoration: none;
+}
+
+.footer-credit a:hover {
+  text-decoration: underline;
+}
+
 @media (max-width: 600px) {
   .form-shell {
     padding: 20px;
@@ -263,5 +339,13 @@
 
   .actions {
     flex-direction: column-reverse;
+  }
+
+  .app-footer {
+    padding-top: 8px;
+  }
+
+  .footer-credit {
+    font-size: 13px;
   }
 }

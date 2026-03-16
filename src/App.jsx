@@ -1,8 +1,16 @@
 import { useState } from "react";
 import "./App.css";
 import emblem from "./assets/emblem.png";
+import squadIcon from "./assets/squad-icon.png";
+import prIcon from "./assets/pr-icon.png";
 import { preQuestionBoxes } from "./data/preQuestionBoxes";
 import { questionPagesByTrack } from "./data/questionPages";
+import { TRACK_IDS } from "../lib/trackIds.js";
+
+const trackIcons = {
+  [TRACK_IDS.SQUAD]: squadIcon,
+  [TRACK_IDS.PROJECT_REALITY]: prIcon,
+};
 
 const getCharLimit = (question) => {
   const value = Number(question?.charLimit);
@@ -49,6 +57,22 @@ function App() {
   const activeCharLimit = getCharLimit(activeQuestion);
   const selectedTrackLabel =
     preQuestionBoxes.find((option) => option.id === selectedTrack)?.label ?? "";
+
+  const footer = (
+    <footer className="app-footer">
+      <div className="footer-brand" aria-label="SPTS BR">
+        <img className="footer-logo" src={emblem} alt="Logo SPTS" />
+      </div>
+      <p className="footer-credit">
+        © 2018-2026{"  "}
+        <a href="https://dsc.gg/sptsbr" target="_blank" rel="noreferrer">
+          Grupo Spartacus
+        </a>
+        <br></br>
+        Made by <strong>galahad</strong>
+      </p>
+    </footer>
+  );
 
   const canContinue = (() => {
     if (isFirstStep) {
@@ -250,235 +274,264 @@ function App() {
   if (submitted) {
     return (
       <main className="page">
-        <section className="form-shell done">
-          <p className="step-label">Formulario enviado!</p>
-          <h1>Obrigado pelo preenchimento</h1>
-          <p className="description">
-            Suas respostas para {selectedTrackLabel} foram registradas. Entre em
-            contato no Discord caso tenha alguma dúvida..
-          </p>
-          <button
-            type="button"
-            className="button button-primary"
-            onClick={() => {
-              setSubmitted(false);
-              setCurrentStep(0);
-              setSelectedTrack("");
-              setFormData({});
-            }}
-          >
-            Preencher novamente
-          </button>
-        </section>
+        <div className="page-content">
+          <section className="form-shell done">
+            <p className="step-label">Formulario enviado!</p>
+            <h1>Obrigado pelo preenchimento</h1>
+            <p className="description">
+              Suas respostas para {selectedTrackLabel} foram registradas. Entre
+              em contato no Discord caso tenha alguma dúvida.
+            </p>
+            <button
+              type="button"
+              className="button button-primary"
+              onClick={() => {
+                setSubmitted(false);
+                setCurrentStep(0);
+                setSelectedTrack("");
+                setFormData({});
+              }}
+            >
+              Preencher novamente
+            </button>
+          </section>
+
+          {footer}
+        </div>
       </main>
     );
   }
 
   return (
     <main className="page">
-      <form
-        className="form-shell"
-        onSubmit={(event) => {
-          event.preventDefault();
-          void handleNext();
-        }}
-      >
-        {isFirstStep ? (
-          <div className="hero-logo-wrap" aria-hidden="true">
-            <img className="hero-logo" src={emblem} alt="" />
-          </div>
-        ) : null}
+      <div className="page-content">
+        <form
+          className="form-shell"
+          onSubmit={(event) => {
+            event.preventDefault();
+            void handleNext();
+          }}
+        >
+          {isFirstStep ? (
+            <div className="hero-logo-wrap" aria-hidden="true">
+              <img className="hero-logo" src={emblem} alt="" />
+            </div>
+          ) : null}
 
-        <p className="step-label">
-          Etapa {currentStep + 1} de {totalSteps}
-        </p>
-        <h1>{isFirstStep ? "Escolha um núcleo" : "Pergunta"}</h1>
-        <p className="description">
-          {isFirstStep
-            ? "Selecione abaixo para carregar as perguntas de cada núcleo."
-            : activeQuestion.question}
-        </p>
-        {!isFirstStep && activeQuestion.supportingText ? (
-          <p className="supporting-text">{activeQuestion.supportingText}</p>
-        ) : null}
+          <p className="step-label">
+            Etapa {currentStep + 1} de {totalSteps}
+          </p>
+          <h1>{isFirstStep ? "Escolha um núcleo" : "Pergunta"}</h1>
+          <p className="description">
+            {isFirstStep
+              ? "Selecione abaixo para carregar as perguntas de cada núcleo."
+              : activeQuestion.question}
+          </p>
 
-        {isFirstStep ? (
-          <div className="choice-grid">
-            {preQuestionBoxes.map((option) => (
-              <button
-                key={option.id}
-                type="button"
-                className={`choice-card ${
-                  selectedTrack === option.id ? "choice-card-selected" : ""
-                }`}
-                onClick={() => handleTrackSelection(option.id)}
-              >
-                <span className="choice-title">{option.label}</span>
-                <span className="choice-description">{option.description}</span>
-              </button>
-            ))}
-          </div>
-        ) : (
-          <div className="fields-grid">
-            <label key={activeQuestion.id} className="field-card">
-              <span>{activeQuestion.label}</span>
+          {isFirstStep ? (
+            <p className="discord-link-note">
+              Nosso Discord:{"  "}
+              <a href="https://dsc.gg/sptsbr" target="_blank" rel="noreferrer">
+                dsc.gg/sptsbr
+              </a>
+            </p>
+          ) : null}
+          {!isFirstStep && activeQuestion.supportingText ? (
+            <p className="supporting-text">{activeQuestion.supportingText}</p>
+          ) : null}
 
-              {isMultiSelectQuestion ? (
-                <div
-                  className="multi-select-wrap"
-                  role="group"
-                  aria-label={activeQuestion.label}
+          {isFirstStep ? (
+            <div className="choice-grid">
+              {preQuestionBoxes.map((option) => (
+                <button
+                  key={option.id}
+                  type="button"
+                  className={`choice-card ${
+                    selectedTrack === option.id ? "choice-card-selected" : ""
+                  }`}
+                  onClick={() => handleTrackSelection(option.id)}
                 >
-                  {optionChoices.map((option) => {
-                    const isChecked = selectedMultiOptions.includes(option);
+                  <span className="choice-title-row">
+                    {trackIcons[option.id] ? (
+                      <img
+                        className="choice-game-icon"
+                        src={trackIcons[option.id]}
+                        alt=""
+                        aria-hidden="true"
+                      />
+                    ) : null}
+                    <span className="choice-title">{option.label}</span>
+                  </span>
+                  <span className="choice-description">
+                    {option.description}
+                  </span>
+                </button>
+              ))}
+            </div>
+          ) : (
+            <div className="fields-grid">
+              <label key={activeQuestion.id} className="field-card">
+                <span>{activeQuestion.label}</span>
 
-                    return (
-                      <label key={option} className="multi-select-option">
-                        <input
-                          type="checkbox"
-                          checked={isChecked}
-                          onChange={(event) =>
-                            handleMultiSelectToggle(
-                              activeQuestion.id,
-                              option,
-                              event.target.checked,
-                            )
-                          }
-                        />
-                        <span>{option}</span>
-                      </label>
-                    );
-                  })}
+                {isMultiSelectQuestion ? (
+                  <div
+                    className="multi-select-wrap"
+                    role="group"
+                    aria-label={activeQuestion.label}
+                  >
+                    {optionChoices.map((option) => {
+                      const isChecked = selectedMultiOptions.includes(option);
 
-                  {activeQuestion.allowOtherOption && selectedOtherOption ? (
-                    <input
-                      type="text"
-                      className="other-option-input"
-                      value={String(multiSelectValue.otherText ?? "")}
-                      onChange={(event) =>
-                        handleMultiSelectOtherText(
-                          activeQuestion.id,
-                          event.target.value,
-                          activeCharLimit,
-                        )
-                      }
-                      placeholder={
-                        activeQuestion.otherOptionPlaceholder ??
-                        "Especifique a opção 'Outro'"
-                      }
-                      maxLength={activeCharLimit ?? undefined}
-                    />
-                  ) : null}
-                </div>
-              ) : isBooleanQuestion || hasCustomOptions ? (
-                <div
-                  className="option-toggle"
-                  role="group"
-                  aria-label={activeQuestion.label}
-                >
-                  {optionChoices.map((option) => {
-                    const optionValue = isBooleanQuestion
-                      ? option === "Sim"
-                      : option;
-                    const isSelected = isBooleanQuestion
-                      ? activeAnswer === optionValue
-                      : activeAnswer === option;
+                      return (
+                        <label key={option} className="multi-select-option">
+                          <input
+                            type="checkbox"
+                            checked={isChecked}
+                            onChange={(event) =>
+                              handleMultiSelectToggle(
+                                activeQuestion.id,
+                                option,
+                                event.target.checked,
+                              )
+                            }
+                          />
+                          <span>{option}</span>
+                        </label>
+                      );
+                    })}
 
-                    return (
-                      <button
-                        key={option}
-                        type="button"
-                        className={`option-button ${isSelected ? "option-button-selected" : ""}`}
-                        onClick={() =>
-                          handleFieldChange(activeQuestion.id, optionValue)
+                    {activeQuestion.allowOtherOption && selectedOtherOption ? (
+                      <input
+                        type="text"
+                        className="other-option-input"
+                        value={String(multiSelectValue.otherText ?? "")}
+                        onChange={(event) =>
+                          handleMultiSelectOtherText(
+                            activeQuestion.id,
+                            event.target.value,
+                            activeCharLimit,
+                          )
                         }
-                      >
-                        {option}
-                      </button>
-                    );
-                  })}
-                </div>
-              ) : isLongTextQuestion ? (
-                <textarea
-                  name={activeQuestion.id}
-                  value={String(activeAnswer ?? "")}
-                  onChange={(event) =>
-                    handleFieldChange(
-                      activeQuestion.id,
-                      event.target.value,
-                      activeCharLimit,
-                      isOnlyNumbersQuestion,
-                    )
-                  }
-                  placeholder={activeQuestion.placeholder}
-                  rows={5}
-                  maxLength={activeCharLimit ?? undefined}
-                  inputMode={isOnlyNumbersQuestion ? "numeric" : undefined}
-                />
-              ) : (
-                <input
-                  type="text"
-                  name={activeQuestion.id}
-                  value={String(activeAnswer ?? "")}
-                  onChange={(event) =>
-                    handleFieldChange(
-                      activeQuestion.id,
-                      event.target.value,
-                      activeCharLimit,
-                      isOnlyNumbersQuestion,
-                    )
-                  }
-                  placeholder={activeQuestion.placeholder}
-                  maxLength={activeCharLimit ?? undefined}
-                  inputMode={isOnlyNumbersQuestion ? "numeric" : undefined}
-                  pattern={isOnlyNumbersQuestion ? "[0-9]*" : undefined}
-                />
-              )}
+                        placeholder={
+                          activeQuestion.otherOptionPlaceholder ??
+                          "Especifique a opção 'Outro'"
+                        }
+                        maxLength={activeCharLimit ?? undefined}
+                      />
+                    ) : null}
+                  </div>
+                ) : isBooleanQuestion || hasCustomOptions ? (
+                  <div
+                    className="option-toggle"
+                    role="group"
+                    aria-label={activeQuestion.label}
+                  >
+                    {optionChoices.map((option) => {
+                      const optionValue = isBooleanQuestion
+                        ? option === "Sim"
+                        : option;
+                      const isSelected = isBooleanQuestion
+                        ? activeAnswer === optionValue
+                        : activeAnswer === option;
 
-              {!isBooleanQuestion &&
-              !isMultiSelectQuestion &&
-              activeCharLimit ? (
-                <small className="char-limit">
-                  {String(activeAnswer ?? "").length}/{activeCharLimit}
-                </small>
-              ) : null}
+                      return (
+                        <button
+                          key={option}
+                          type="button"
+                          className={`option-button ${isSelected ? "option-button-selected" : ""}`}
+                          onClick={() =>
+                            handleFieldChange(activeQuestion.id, optionValue)
+                          }
+                        >
+                          {option}
+                        </button>
+                      );
+                    })}
+                  </div>
+                ) : isLongTextQuestion ? (
+                  <textarea
+                    name={activeQuestion.id}
+                    value={String(activeAnswer ?? "")}
+                    onChange={(event) =>
+                      handleFieldChange(
+                        activeQuestion.id,
+                        event.target.value,
+                        activeCharLimit,
+                        isOnlyNumbersQuestion,
+                      )
+                    }
+                    placeholder={activeQuestion.placeholder}
+                    rows={5}
+                    maxLength={activeCharLimit ?? undefined}
+                    inputMode={isOnlyNumbersQuestion ? "numeric" : undefined}
+                  />
+                ) : (
+                  <input
+                    type="text"
+                    name={activeQuestion.id}
+                    value={String(activeAnswer ?? "")}
+                    onChange={(event) =>
+                      handleFieldChange(
+                        activeQuestion.id,
+                        event.target.value,
+                        activeCharLimit,
+                        isOnlyNumbersQuestion,
+                      )
+                    }
+                    placeholder={activeQuestion.placeholder}
+                    maxLength={activeCharLimit ?? undefined}
+                    inputMode={isOnlyNumbersQuestion ? "numeric" : undefined}
+                    pattern={isOnlyNumbersQuestion ? "[0-9]*" : undefined}
+                  />
+                )}
 
-              {isMultiSelectQuestion &&
-              activeCharLimit &&
-              selectedOtherOption ? (
-                <small className="char-limit">
-                  {String(multiSelectValue.otherText ?? "").length}/
-                  {activeCharLimit}
-                </small>
-              ) : null}
-            </label>
+                {!isBooleanQuestion &&
+                !isMultiSelectQuestion &&
+                activeCharLimit ? (
+                  <small className="char-limit">
+                    {String(activeAnswer ?? "").length}/{activeCharLimit}
+                  </small>
+                ) : null}
+
+                {isMultiSelectQuestion &&
+                activeCharLimit &&
+                selectedOtherOption ? (
+                  <small className="char-limit">
+                    {String(multiSelectValue.otherText ?? "").length}/
+                    {activeCharLimit}
+                  </small>
+                ) : null}
+              </label>
+            </div>
+          )}
+
+          {submitError ? <p className="form-error">{submitError}</p> : null}
+
+          <div className="actions">
+            <button
+              type="button"
+              className="button button-secondary"
+              onClick={handleBack}
+              disabled={isFirstStep || isSubmitting}
+            >
+              Voltar
+            </button>
+            <button
+              type="submit"
+              className="button button-primary"
+              disabled={!canContinue || isSubmitting}
+            >
+              {isLastStep
+                ? isSubmitting
+                  ? "Enviando..."
+                  : "Finalizar"
+                : "Próxima"}
+            </button>
           </div>
-        )}
+        </form>
 
-        {submitError ? <p className="form-error">{submitError}</p> : null}
-
-        <div className="actions">
-          <button
-            type="button"
-            className="button button-secondary"
-            onClick={handleBack}
-            disabled={isFirstStep || isSubmitting}
-          >
-            Voltar
-          </button>
-          <button
-            type="submit"
-            className="button button-primary"
-            disabled={!canContinue || isSubmitting}
-          >
-            {isLastStep
-              ? isSubmitting
-                ? "Enviando..."
-                : "Finalizar"
-              : "Próxima"}
-          </button>
-        </div>
-      </form>
+        {footer}
+      </div>
     </main>
   );
 }
