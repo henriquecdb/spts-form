@@ -24,7 +24,7 @@ export default async function handler(request, response) {
   if (!webhookUrl) {
     response.status(500).json({
       error:
-        "Webhook não configurado para o track recebido. Configure DISCORD_SQUAD_WEBHOOK_URL e DISCORD_PR_WEBHOOK_URL.",
+        "Webhook não configurado para o track recebido. Configure DISCORD_SQUAD_WEBHOOK_URL, DISCORD_PR_WEBHOOK_URL e DISCORD_ARMA3_WEBHOOK_URL.",
     });
     return;
   }

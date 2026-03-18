@@ -3,6 +3,7 @@ import "./App.css";
 import emblem from "./assets/emblem.png";
 import squadIcon from "./assets/squad-icon.png";
 import prIcon from "./assets/pr-icon.png";
+import armaIcon from "./assets/arma-icon.png";
 import { preQuestionBoxes } from "./data/preQuestionBoxes";
 import { questionPagesByTrack } from "./data/questionPages";
 import { TRACK_IDS } from "../lib/trackIds.js";
@@ -10,6 +11,7 @@ import { TRACK_IDS } from "../lib/trackIds.js";
 const trackIcons = {
   [TRACK_IDS.SQUAD]: squadIcon,
   [TRACK_IDS.PROJECT_REALITY]: prIcon,
+  [TRACK_IDS.ARMA_3]: armaIcon,
 };
 
 const getCharLimit = (question) => {
