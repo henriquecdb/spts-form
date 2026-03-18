@@ -11,4 +11,9 @@ export const preQuestionBoxes = [
     label: "Project Reality",
     description: "Caso queira entrar no núcleo de Project Reality.",
   },
+  {
+    id: TRACK_IDS.ARMA_3,
+    label: "Arma 3",
+    description: "Caso queira entrar no núcleo de Arma 3.",
+  },
 ];

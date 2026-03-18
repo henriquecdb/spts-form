@@ -291,4 +291,29 @@ export const questionPagesByTrack = {
       charLimit: 60,
     },
   ],
+  [TRACK_IDS.ARMA_3]: [
+    {
+      id: "discordNick",
+      label: "Qual é o seu usuário no Discord?",
+      placeholder: "Ex: NickdoDiscord",
+      charLimit: 60,
+    },
+    {
+      id: "age",
+      label: "Qual a sua idade?",
+      placeholder: "Idade mínima permitida é de 15 anos.",
+      charLimit: 2,
+      onlyNumbers: true,
+    },
+    {
+      id: "hasMicrophone",
+      label: "Voce possui microfone funcional?",
+      boolean: true,
+    },
+    {
+      id: "discordAvailability",
+      label: "Você entra no Discord com muita frequência?",
+      boolean: true,
+    },
+  ],
 };
