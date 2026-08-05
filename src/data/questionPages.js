@@ -112,6 +112,13 @@ export const questionPagesByTrack = {
       longText: true,
       charLimit: 500,
     },
+    {
+      id: "knowsReactionServerPolicy",
+      label: "Conhecimento sobre servidores REAÇÃO",
+      question:
+        "Você tem conhecimento e concorda que o clã SPTS não joga nos servidores REAÇÃO?",
+      boolean: true,
+    },
   ],
   [TRACK_IDS.PROJECT_REALITY]: [
     {
