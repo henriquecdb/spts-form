@@ -3,12 +3,6 @@ import { TRACK_IDS } from "../../lib/trackIds.js";
 export const questionPagesByTrack = {
   [TRACK_IDS.SQUAD]: [
     {
-      id: "discordNick",
-      label: "Qual é o seu usuário no Discord?",
-      placeholder: "Ex: NickdoDiscord",
-      charLimit: 60,
-    },
-    {
       id: "age",
       label: "Qual a sua idade?",
       placeholder: "Idade mínima permitida é de 15 anos.",
@@ -17,28 +11,28 @@ export const questionPagesByTrack = {
     },
     {
       id: "hasMicrophone",
-      label: "Voce possui microfone funcional?",
+      label: "Você possui microfone funcional?",
       boolean: true,
     },
     {
-      id: "discordAvailability",
-      label: "Você entra no Discord com muita frequência?",
-      boolean: true,
+      id: "discordUserId",
+      label: "Qual é o seu ID de usuário no Discord?",
+      question:
+        "Qual é o seu ID de usuário no Discord (ex: 85674234285862342)?",
+      placeholder: "Ex: 85674234285862342",
+      charLimit: 20,
+      onlyNumbers: true,
     },
     {
-      id: "clanParticipation",
-      label: "Está participando atualmente de algum grupo/clã?",
-      boolean: true,
-    },
-    {
-      id: "clanParticipationText",
-      label: "Se sim, digite qual. Se não, preencha que não participa.",
-      placeholder: "Clã ou comunidade da qual participa.",
-      charLimit: 30,
+      id: "inGameName",
+      label: "Qual seu nick/nome no jogo?",
+      question: "Qual seu nick/nome no jogo?",
+      placeholder: "Informe seu nick dentro do jogo.",
+      charLimit: 60,
     },
     {
       id: "groupReferral",
-      label: "Como você encontrou o grupo?",
+      label: "Como ou com quem você encontrou o grupo?",
       supportingText:
         "Qual membro do clã te indicou? A indicação é obrigatória. *",
       placeholder: "Informe como chegou ao grupo e quem indicou você.",
@@ -56,14 +50,16 @@ export const questionPagesByTrack = {
     {
       id: "understoodSpartacusCode",
       question:
-        "Se sim, foi possível entender as regras e o funcionamento do grupo?",
+        "Através do Código Máximo Spartacus, foi possível entender as regras e o funcionamento do grupo?",
       options: ["Sim", "Não", "Um pouco, tenho dúvidas"],
     },
     {
-      id: "rotatingAdministration",
-      question:
-        "Você gostaria de participar de um clã onde a administração é rotativa?",
-      options: ["Sim", "Não", "Indiferente"],
+      id: "clanParticipation",
+      label:
+        "Você está participando de algum grupo/clã no momento? Se for o caso, digite qual. Caso contrário, indique que não participa.",
+      placeholder: "Se não participa, informe que não participa.",
+      boolean: false,
+      charLimit: 30,
     },
     {
       id: "cooperativePerson",
@@ -73,18 +69,11 @@ export const questionPagesByTrack = {
       options: ["Sim", "Não", "Um pouco"],
     },
     {
-      id: "expectedContribution",
-      label: "Sua participação no grupo",
-      question: "O que podemos esperar com a sua participação no grupo?",
-      placeholder: "Descreva como você pretende agregar ao grupo.",
-      longText: true,
-      charLimit: 500,
-    },
-    {
-      id: "expectedReturn",
-      label: "Expectativa sobre o clã",
-      question: "E o que você espera do clã em retorno à sua participação?",
-      placeholder: "Descreva o que espera receber do grupo.",
+      id: "squadSpecificTraining",
+      label: "Treino específico para Squad",
+      question:
+        "Já fez algum treino específico para Squad? Se sim, o que foi treinado?",
+      placeholder: "Descreva se já participou de treino e o que foi treinado.",
       longText: true,
       charLimit: 500,
     },
@@ -96,30 +85,35 @@ export const questionPagesByTrack = {
       charLimit: 120,
     },
     {
-      id: "squadWeeklyFrequency",
-      label: "Frequência semanal no Squad",
-      question: "Com que frequência você joga Squad por semana?",
-      options: [
-        "Jogo com muita frequência",
-        "Jogo com pouca frequência",
-        "Raramente jogo",
-      ],
+      id: "squadSelfRating",
+      label: "No Squad, como você se define?",
+      question: "No Squad, como você se define?",
+      options: ["Novato", "Intermediário", "Experiente", "Veterano"],
     },
     {
-      id: "knowsReactionServerPolicy",
-      label: "Conhecimento sobre servidores REAÇÃO",
-      question:
-        "Você tem conhecimento e concorda que o clã SPTS não joga nos servidores REAÇÃO?",
+      id: "squadLeaderExperience",
+      label: "Você tem alguma experiência como líder de esquadrão?",
+      question: "Você tem alguma experiência como líder de esquadrão?",
       boolean: true,
+    },
+    {
+      id: "expectedReturn",
+      label: "Expectativa sobre o clã",
+      question: "E o que você espera do clã em retorno à sua participação?",
+      placeholder: "Descreva o que espera receber do grupo.",
+      longText: true,
+      charLimit: 500,
+    },
+    {
+      id: "expectedContribution",
+      label: "Sua participação no grupo",
+      question: "O que podemos esperar com a sua participação no grupo?",
+      placeholder: "Descreva como você pretende agregar ao grupo.",
+      longText: true,
+      charLimit: 500,
     },
   ],
   [TRACK_IDS.PROJECT_REALITY]: [
-    {
-      id: "discordNick",
-      label: "Qual é o seu usuário no Discord?",
-      placeholder: "Ex: NickdoDiscord",
-      charLimit: 60,
-    },
     {
       id: "age",
       label: "Qual a sua idade?",
@@ -129,28 +123,28 @@ export const questionPagesByTrack = {
     },
     {
       id: "hasMicrophone",
-      label: "Voce possui microfone funcional?",
+      label: "Você possui microfone funcional?",
       boolean: true,
     },
     {
-      id: "discordAvailability",
-      label: "Você entra no Discord com muita frequência?",
-      boolean: true,
+      id: "discordUserId",
+      label: "Qual é o seu ID de usuário no Discord?",
+      question:
+        "Qual é o seu ID de usuário no Discord (ex: 85674234285862342)?",
+      placeholder: "Ex: 85674234285862342",
+      charLimit: 20,
+      onlyNumbers: true,
     },
     {
-      id: "clanParticipation",
-      label: "Está participando atualmente de algum grupo/clã?",
-      boolean: true,
-    },
-    {
-      id: "clanParticipationText",
-      label: "Se sim, digite qual. Se não, preencha que não participa.",
-      placeholder: "Clã ou comunidade da qual participa.",
-      charLimit: 30,
+      id: "inGameName",
+      label: "Qual seu nick/nome no jogo?",
+      question: "Qual seu nick/nome no jogo?",
+      placeholder: "Informe seu nick dentro do jogo.",
+      charLimit: 60,
     },
     {
       id: "groupReferral",
-      label: "Como você encontrou o grupo?",
+      label: "Como ou com quem você encontrou o grupo?",
       supportingText:
         "Qual membro do clã te indicou? A indicação é obrigatória. *",
       placeholder: "Informe como chegou ao grupo e quem indicou você.",
@@ -168,14 +162,16 @@ export const questionPagesByTrack = {
     {
       id: "understoodSpartacusCode",
       question:
-        "Se sim, foi possível entender as regras e o funcionamento do grupo?",
+        "Através do Código Máximo Spartacus, foi possível entender as regras e o funcionamento do grupo?",
       options: ["Sim", "Não", "Um pouco, tenho dúvidas"],
     },
     {
-      id: "rotatingAdministration",
-      question:
-        "Você gostaria de participar de um clã onde a administração é rotativa?",
-      options: ["Sim", "Não", "Indiferente"],
+      id: "clanParticipation",
+      label:
+        "Você está participando de algum grupo/clã no momento? Se for o caso, digite qual. Caso contrário, indique que não participa.",
+      placeholder: "Se não participa, informe que não participa.",
+      boolean: false,
+      charLimit: 30,
     },
     {
       id: "cooperativePerson",
@@ -183,88 +179,6 @@ export const questionPagesByTrack = {
       supportingText:
         "Em algumas ocasiões o grupo requer a participação, geralmente não-obrigatória, de membros.",
       options: ["Sim", "Não", "Um pouco"],
-    },
-    {
-      id: "expectedContribution",
-      label: "Sua participação no grupo",
-      question: "O que podemos esperar com a sua participação no grupo?",
-      placeholder: "Descreva como você pretende agregar ao grupo.",
-      longText: true,
-      charLimit: 500,
-    },
-    {
-      id: "expectedReturn",
-      label: "Expectativa sobre o clã",
-      question: "E o que você espera do clã em retorno à sua participação?",
-      placeholder: "Descreva o que espera receber do grupo.",
-      longText: true,
-      charLimit: 500,
-    },
-    {
-      id: "prPlayTime",
-      label: "Tempo de jogo no PR",
-      question: "Há quanto tempo você joga?",
-      placeholder: "Ex: 6 meses, 2 anos, desde 2021.",
-      charLimit: 120,
-    },
-    {
-      id: "prWeeklyFrequency",
-      label: "Frequência semanal no PR",
-      question: "Com que frequência você joga PR por semana?",
-      options: [
-        "Jogo com muita frequência",
-        "Jogo com pouca frequência",
-        "Raramente jogo",
-      ],
-    },
-    {
-      id: "knowsReactionServerPolicy",
-      label: "Conhecimento sobre servidores REAÇÃO",
-      question:
-        "Você tem conhecimento e concorda que o clã SPTS não joga nos servidores REAÇÃO?",
-      boolean: true,
-    },
-    {
-      id: "prSelfRating",
-      label: "No Project Reality, como você se define?",
-      question: "No Project Reality, como você se define?",
-      options: ["Novato", "Intermediário", "Experiente", "Veterano"],
-    },
-    {
-      id: "prBestKits",
-      label: "Quais destes kits básicos abaixo você tem mais habilidade?",
-      question: "Quais destes kits básicos abaixo você tem mais habilidade?",
-      multiSelect: true,
-      options: [
-        "Grenadier",
-        "Rifleman",
-        "Automatic Rifleman",
-        "Breacher",
-        "Combat Medic",
-        "Anti-Tank Rifleman",
-        "Nenhum",
-        "Outro",
-      ],
-      allowOtherOption: true,
-      otherOptionLabel: "Outro",
-      otherOptionPlaceholder: "Se marcou Outro, informe qual kit.",
-      charLimit: 120,
-    },
-    {
-      id: "prSquadLeaderExperience",
-      label: "Você tem alguma experiência como líder de esquadrão?",
-      question: "Você tem alguma experiência como líder de esquadrão?",
-      boolean: true,
-    },
-    {
-      id: "prSpecificTraining",
-      label:
-        "Já fez algum treino específico para Project Reality? Se sim, o que foi treinado?",
-      question:
-        "Já fez algum treino específico para Project Reality? Se sim, o que foi treinado?",
-      placeholder: "Descreva se já participou de treino e o que foi treinado.",
-      longText: true,
-      charLimit: 500,
     },
     {
       id: "prBanHistory",
@@ -277,18 +191,56 @@ export const questionPagesByTrack = {
       charLimit: 500,
     },
     {
+      id: "prSpecificTraining",
+      label:
+        "Já fez algum treino específico para Project Reality? Se sim, o que foi treinado?",
+      question:
+        "Já fez algum treino específico para Project Reality? Se sim, o que foi treinado?",
+      placeholder: "Descreva se já participou de treino e o que foi treinado.",
+      longText: true,
+      charLimit: 500,
+    },
+    {
+      id: "prPlayTime",
+      label: "Tempo de jogo no PR",
+      question: "Há quanto tempo você joga?",
+      placeholder: "Ex: 6 meses, 2 anos, desde 2021.",
+      charLimit: 120,
+    },
+    {
+      id: "prSelfRating",
+      label: "No Project Reality, como você se define?",
+      question: "No Project Reality, como você se define?",
+      options: ["Novato", "Intermediário", "Experiente", "Veterano"],
+    },
+    {
+      id: "prSquadLeaderExperience",
+      label: "Você tem alguma experiência como líder de esquadrão?",
+      question: "Você tem alguma experiência como líder de esquadrão?",
+      boolean: true,
+    },
+    {
+      id: "expectedReturn",
+      label: "Expectativa sobre o clã",
+      question: "E o que você espera do clã em retorno à sua participação?",
+      placeholder: "Descreva o que espera receber do grupo.",
+      longText: true,
+      charLimit: 500,
+    },
+    {
+      id: "expectedContribution",
+      label: "Sua participação no grupo",
+      question: "O que podemos esperar com a sua participação no grupo?",
+      placeholder: "Descreva como você pretende agregar ao grupo.",
+      longText: true,
+      charLimit: 500,
+    },
+    {
       id: "readOfficialManual",
       label: "Você já leu o manual oficial do jogo alguma vez?",
       question: "Você já leu o manual oficial do jogo alguma vez?",
       supportingText: "www.realitymod.com/manual",
       boolean: true,
-    },
-    {
-      id: "inGameName",
-      label: "Qual seu nome no jogo?",
-      question: "Qual seu nome no jogo?",
-      placeholder: "Informe seu nick dentro do jogo.",
-      charLimit: 60,
     },
   ],
   [TRACK_IDS.ARMA_3]: [
